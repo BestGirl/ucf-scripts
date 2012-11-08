@@ -11,15 +11,16 @@
 #
 # Written by Lou Ruppert <lou@ucf.org>
 #
-import subprocess, re, os
+import subprocess
+import re
+import os
 
-pl = subprocess.Popen(['/bin/ps', '-U', '0'], stdout=subprocess.PIPE).communicate()[0]
+pl = subprocess.Popen(['/bin/ps', '-U', '0'],
+                       stdout=subprocess.PIPE).communicate()[0]
 
-for line in pl.splitlines() :
-   m = re.search('(\d+)\s+\?\s+[\d+:]+\s+imapd',line)
-   if (m != None) :
-	pid = int(m.group(1))
-	if (pid != 0) :
-	    os.kill(pid,9)
-
-
+for line in pl.splitlines():
+    m = re.search('(\d+)\s+\?\s+[\d+:]+\s+imapd', line)
+    if (m != None):
+        pid = int(m.group(1))
+        if (pid != 0):
+            os.kill(pid, 9)
